@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Java CI with Gradle
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+          java-version: 1.8
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Docker Build & Push Action
+        # You may pin to the exact commit or the version.
+        # uses: mr-smithers-excellent/docker-build-push@1e93d4d837c48d19a902155152cb23502f86c096
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          # Name of the Docker image
+          image: rathinamtrainers/sample-java-app
+          # Target Docker registry
+          registry: docker.io
+          # Docker registry username
+          username: rathinamtrainers
+          # Docker registry password
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+
+
+
