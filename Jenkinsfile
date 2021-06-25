@@ -2,6 +2,7 @@ pipeline {
   agent {
     node {
       label 'centos8'
+      customWorkspace '/tmp/myworkspaces'
     }
 
   }
