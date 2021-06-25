@@ -21,4 +21,7 @@ pipeline {
     }
 
   }
+  environment {
+    customWorkspace = '/tmp/myworkspaces'
+  }
 }
