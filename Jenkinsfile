@@ -1,7 +1,9 @@
 pipeline {
   agent {
-    docker 'centos:8'
-    label 'centos8'
+    docker {
+      image 'centos:8'
+      label 'centos8'
+    }
   }
   stages {
     stage('Build') {
