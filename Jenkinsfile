@@ -11,7 +11,6 @@ pipeline {
     }
 
     stage('Testing') {
-      agent any
       steps {
         sh 'echo "Testing completed"'
       }
