@@ -1,28 +1,15 @@
 pipeline {
     agent {
-        node 'centos8'
+        docker {
+            image 'maven:3.8.1-adoptopenjdk-11'
+            label 'centos8'
+            args '-v $HOME/.m2:/root/.m2'
+        }
     }
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'gradle:6.7-jdk11'
-                    reuseNode true
-                }
-            }
             steps {
-                sh 'gradle --version'
-            }
-        }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'node:14-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh 'node --version'
+                sh 'mvn -B'
             }
         }
     }
