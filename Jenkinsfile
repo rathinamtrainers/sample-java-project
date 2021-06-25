@@ -1,22 +1,12 @@
 pipeline {
-  agent {
-    docker {
-      image 'centos:8'
-      label 'centos8'
+    agent {
+        docker { image 'node:14-alpine' }
     }
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh 'echo "Building"'
-      }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
-
-    stage('Testing') {
-      steps {
-        sh 'echo "Testing completed"'
-      }
-    }
-
-  }
 }
