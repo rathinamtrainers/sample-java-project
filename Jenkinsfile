@@ -1,15 +1,16 @@
-node('worker-1') {
-    /* Requires the Docker Pipeline plugin to be installed */
-
-    stage('Back-end') {
-        docker.image('maven:3.8.1-adoptopenjdk-11').inside {
-            sh 'mvn --version'
-        }
+pipeline {
+    agent { 
+        dockerfile {
+            filename 'Dockerfile2'
+            label 'centos8'            
+        }        
     }
-
-    stage('Front-end') {
-        docker.image('node:14-alpine').inside {
-            sh 'node --version'
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'svn --version'
+            }
         }
     }
 }
