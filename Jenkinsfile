@@ -1,10 +1,7 @@
 pipeline {
   agent {
-    node {
-      label 'centos8'
-      customWorkspace '/tmp/myworkspaces'
-    }
-
+    docker 'centos:8'
+    label 'centos8'
   }
   stages {
     stage('Build') {
@@ -20,8 +17,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    customWorkspace = '/tmp/myworkspaces'
   }
 }
