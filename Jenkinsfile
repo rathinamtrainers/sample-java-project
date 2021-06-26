@@ -1,4 +1,4 @@
-node "worker-1" {
+node("worker-1") {
     checkout scm
     /*
      * In order to communicate with the MySQL server, this Pipeline explicitly
