@@ -1,4 +1,4 @@
-node {
+node('worker-1') {
     checkout scm
     docker.image('mysql:5').withRun('-e "MYSQL_ROOT_PASSWORD=my-secret-pw"') { c ->
         docker.image('mysql:5').inside("--link ${c.id}:db") {
